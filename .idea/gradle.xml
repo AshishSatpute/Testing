@@ -9,7 +9,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/slideimage" />
             <option value="$PROJECT_DIR$/slider" />
+            <option value="$PROJECT_DIR$/webkit" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

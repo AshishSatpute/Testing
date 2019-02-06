@@ -1,1 +1,1 @@
-include ':app', ':slider'
+include ':app', ':slider', ':slideimage', ':webkit'
