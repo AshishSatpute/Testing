@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
     <ImageView
         android:layout_margin="8dp"
         android:src="@drawable/ic_launcher_foreground"
