@@ -1,1 +1,1 @@
-include ':app', ':slider', ':slideimage', ':webkit', ':excel', ':videoplayer'
+include ':app', ':slider', ':slideimage', ':webkit', ':excel', ':videoplayer', ':notification', ':fnotification'

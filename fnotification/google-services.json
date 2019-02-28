@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "845829364704",
+    "firebase_url": "https://fnotification-ad241.firebaseio.com",
+    "project_id": "fnotification-ad241",
+    "storage_bucket": "fnotification-ad241.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:845829364704:android:e6158d175913dd4b",
+        "android_client_info": {
+          "package_name": "com.example.fnotification"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "845829364704-v3djh8k9q9utn8d3psq6q0bvvjcju9jg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fnotification",
+            "certificate_hash": "5f859af2f993f251142b76db76885ccb393de374"
+          }
+        },
+        {
+          "client_id": "845829364704-vb9uvjak38dsg1n93mj40jb77f711stq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA97w_mTA2hza9o8_M6jK3r6EwurGtvu3M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "845829364704-vb9uvjak38dsg1n93mj40jb77f711stq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

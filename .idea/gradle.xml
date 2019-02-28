@@ -10,6 +10,8 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/excel" />
+            <option value="$PROJECT_DIR$/fnotification" />
+            <option value="$PROJECT_DIR$/notification" />
             <option value="$PROJECT_DIR$/slideimage" />
             <option value="$PROJECT_DIR$/slider" />
             <option value="$PROJECT_DIR$/videoplayer" />
