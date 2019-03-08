@@ -36,7 +36,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Holder> {
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "" + module.getName() + " : " + module.getPass(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, module.getName() + " : " + module.getPass(), Toast.LENGTH_SHORT).show();
             }
         });
     }
