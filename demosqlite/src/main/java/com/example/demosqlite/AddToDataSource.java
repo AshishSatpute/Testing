@@ -45,7 +45,7 @@ public class AddToDataSource extends DatabaseHelper {
     }
 
     public List<AddDataModel> getAllNotes() {
-        List<AddDataModel> notes = new ArrayList<>();
+        List<AddDataModel> lists = new ArrayList<>();
 
         // Select All Query
         String selectQuery = "SELECT  * FROM " + AddToDataSource.TABLE_NAME_ADD + ";";
@@ -59,7 +59,7 @@ public class AddToDataSource extends DatabaseHelper {
                 AddDataModel addDataModel = new AddDataModel();
                 addDataModel.setName(cursor.getString(cursor.getColumnIndex(COLUMN_USERNAME)));
                 addDataModel.setPassword(cursor.getString(cursor.getColumnIndex(COLUMN_PASSWORD)));
-                notes.add(addDataModel);
+                lists.add(addDataModel);
             } while (cursor.moveToNext());
         }
 
@@ -67,6 +67,6 @@ public class AddToDataSource extends DatabaseHelper {
         db.close();
 
         // return notes list
-        return notes;
+        return lists;
     }
 }
