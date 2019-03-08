@@ -1,1 +1,1 @@
-include ':app', ':slider', ':slideimage', ':webkit', ':excel', ':videoplayer', ':notification', ':fnotification', ':sqlitedb', ':demosqlite'
+include ':app', ':slider', ':slideimage', ':webkit', ':excel', ':videoplayer', ':notification', ':fnotification', ':sqlitedb', ':demosqlite', ':new_sqlite'
