@@ -1,4 +1,4 @@
-package com.example.new_sqlite;
+package com.example.dth;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -9,15 +9,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText etName, etPass;
-    private Button btn_show;
-    private RecyclerView recyclerView;
-    private Context context;
-    private MyAdapter myAdapter;
+    EditText e1, e2;
+    Button button;
+    Context context;
+    RecyclerView rv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,55 +27,71 @@ public class MainActivity extends AppCompatActivity {
 
         listener();
 
+
     }
 
     private void listener() {
-        btn_show.setOnClickListener(new View.OnClickListener() {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 AsyncTaskRunner runner = new AsyncTaskRunner();
+
                 runner.execute();
 
-                /*show list */
-                showList();
+
             }
         });
+
     }
 
-    private void clearText() {
-        etName.setText("");
-        etPass.setText("");
-    }
+    private void showData() {
+        // rv.setAdapter(new MyAdapter(new OperationSource(context).showList(), context));
 
-    private void showList() {
-        myAdapter = new MyAdapter(new AddToDataSource(context).showList(), context);
-        recyclerView.setAdapter(myAdapter);
+
     }
 
     private void init() {
-        etName = (EditText) findViewById(R.id.etName);
-        etPass = (EditText) findViewById(R.id.etPass);
-        btn_show = findViewById(R.id.btn_store);
-        recyclerView = findViewById(R.id.rv);
-        recyclerView.setHasFixedSize(true);
+        e1 = findViewById(R.id.e1);
+        e2 = findViewById(R.id.e2);
+        button = findViewById(R.id.b1);
+        rv = findViewById(R.id.rv);
+        rv.setHasFixedSize(true);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(manager);
+        rv.setLayoutManager(manager);
     }
+
 
     private class AsyncTaskRunner extends AsyncTask<String, String, String> {
 
         @Override
         protected String doInBackground(String... strings) {
-            Module module = new Module();
-            module.setName(etName.getText().toString());
-            module.setPass(etPass.getText().toString());
-            AddToDataSource addToDataSource = new AddToDataSource(context);
-            addToDataSource.addData(module);
+            Model model = new Model();
+            model.setOne(e1.getText().toString());
+            model.setTwo(e2.getText().toString());
 
-            clearText();
+            OperationSource operationSource = new OperationSource(context);
+            operationSource.DoOperation(model);
 
+            showData();
             return "Done";
         }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
+
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
+        }
+
 
     }
 }

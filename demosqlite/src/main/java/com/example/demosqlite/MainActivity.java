@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         addToDataSource.addData(addDataModel);
 
         show();
+
     }
 
     private void show() {
