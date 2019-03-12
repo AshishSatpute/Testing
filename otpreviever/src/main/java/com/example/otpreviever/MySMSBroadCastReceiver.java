@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.telephony.SmsMessage;
 import android.util.Log;
-import android.widget.Toast;
 
 public class MySMSBroadCastReceiver extends BroadcastReceiver {
 
