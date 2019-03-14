@@ -1,6 +1,6 @@
 package com.example.shape;
 
-public class signTopReq {
+public class MoviesResponse {
 
 
 }
