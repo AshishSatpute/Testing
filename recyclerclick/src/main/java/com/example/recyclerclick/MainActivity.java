@@ -1,7 +1,6 @@
 package com.example.recyclerclick;
 
 import android.content.Intent;
-import android.graphics.ColorSpace;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,7 +15,8 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<Model> modelArrayList;
     private CustomAdapter customAdapter;
     private Button btnnext;
-    private String[] fruitlist = new String[]{"Apples", "Oranges", "Potatoes", "Tomatoes","Grapes"};
+    private String[] fruitlist = new String[]{"Apples", "Oranges", "Potatoes", "Tomatoes", "Grapes"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,16 +34,15 @@ public class MainActivity extends AppCompatActivity {
         btnnext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,NextActivity.class);
+                Intent intent = new Intent(MainActivity.this, NextActivity.class);
                 startActivity(intent);
             }
         });
     }
 
-    private ArrayList<Model> getModel(){
+    private ArrayList<Model> getModel() {
         ArrayList<Model> list = new ArrayList<>();
-        for(int i = 0; i < 5; i++){
-
+        for (int i = 0; i < 5; i++) {
             Model model = new Model();
             model.setNumber(1);
             model.setFruit(fruitlist[i]);

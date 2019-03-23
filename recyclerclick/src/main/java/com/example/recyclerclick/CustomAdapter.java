@@ -13,7 +13,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     private Context ctx;
 
     public CustomAdapter(Context ctx) {
-
         inflater = LayoutInflater.from(ctx);
         this.ctx = ctx;
     }
