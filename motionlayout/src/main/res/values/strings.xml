@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MotionLayout</string>
+    <string name="moving_text">Moving Text</string>
+    <string name="slide_up">Slide Up</string>
 </resources>
