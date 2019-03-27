@@ -1,105 +1,119 @@
 package com.example.pagination;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Base64;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 
-import org.json.JSONObject;
+import com.example.pagination.utils.PaginationScrollListener;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    RecyclerView recyclerView;
-    public static final String URL = "https://picsum.photos/300/200/?random";
-    ArrayList<Model> list = new ArrayList<>();
+    private static final String TAG = "MainActivity";
+
+    PaginationAdapter adapter;
+    LinearLayoutManager linearLayoutManager;
+
+    RecyclerView rv;
+    ProgressBar progressBar;
+
+    private static final int PAGE_START = 0;
+    private boolean isLoading = false;
+    private boolean isLastPage = false;
+    private int TOTAL_PAGES = 5;
+    private int currentPage = PAGE_START;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-      /*  recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager manager = new GridLayoutManager(getApplicationContext(), 2, LinearLayoutManager.HORIZONTAL, false);*/
+        rv = (RecyclerView) findViewById(R.id.main_recycler);
+        progressBar = (ProgressBar) findViewById(R.id.main_progress);
 
-        getAttendanceList();
+        adapter = new PaginationAdapter(this);
 
-    }
+        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        rv.setLayoutManager(linearLayoutManager);
 
-    private void getData() {
-        for (int i = 0; i < 900; i++) {
-            Log.i("i", "getData: " + i);
-        }
-    }
+        rv.setItemAnimator(new DefaultItemAnimator());
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+        rv.setAdapter(adapter);
 
-    }
-
-    private void getAttendanceList() {
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+        rv.addOnScrollListener(new PaginationScrollListener(linearLayoutManager) {
             @Override
-            public void onResponse(String response) {
+            protected void loadMoreItems() {
+                isLoading = true;
+                currentPage += 1;
 
+                // mocking network delay for API call
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadNextPage();
+                    }
+                }, 1000);
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
 
+            @Override
+            public int getTotalPageCount() {
+                return TOTAL_PAGES;
+            }
+
+            @Override
+            public boolean isLastPage() {
+                return isLastPage;
+            }
+
+            @Override
+            public boolean isLoading() {
+                return isLoading;
             }
         });
 
-        JsonObjectRequest jsonRequest = new JsonObjectRequest(
-                Request.Method.GET,
-                URL,
-                null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
 
-                        for (int i = 0; i < 500; i++) {
-                            Model model = new Model(URL);
-                            list.add(model);
-                            Log.i("i", "onResponse: " + model.getFilename());
-                        }
-                    }
-                }, new Response.ErrorListener() {
+        // mocking network delay for API call
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.i("error", "onErrorResponse: " + error);
-
+            public void run() {
+                loadFirstPage();
             }
-        }) {
+        }, 1000);
 
-
-            Map<String, String> createBasicAuthHeader(String username, String password) {
-                Map<String, String> headerMap = new HashMap<String, String>();
-
-                String credentials = username + ":" + password;
-                String encodedCredentials = Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
-                headerMap.put("Authorization", "Basic " + encodedCredentials);
-                headerMap.put("Content-Type", "application/x-www-form-urlencoded");
-                /*  headerMap.put("x-api-key", "cw00ggcsw4co0g804gcggwo088g4kokgk88sso4s");*/
-                return headerMap;
-            }
-
-        };
-        AppController.getInstance(this).addToRequest(jsonRequest);
     }
+
+
+    private void loadFirstPage() {
+        Log.d(TAG, "loadFirstPage: ");
+        List<Movie> movies = Movie.createMovies(adapter.getItemCount());
+        progressBar.setVisibility(View.GONE);
+        adapter.addAll(movies);
+
+        if (currentPage <= TOTAL_PAGES) adapter.addLoadingFooter();
+        else isLastPage = true;
+
+    }
+
+    private void loadNextPage() {
+        Log.d(TAG, "loadNextPage: " + currentPage);
+        List<Movie> movies = Movie.createMovies(adapter.getItemCount());
+
+        adapter.removeLoadingFooter();
+        isLoading = false;
+
+        adapter.addAll(movies);
+
+        if (currentPage != TOTAL_PAGES) adapter.addLoadingFooter();
+        else isLastPage = true;
+    }
+
 
 }
